@@ -1,0 +1,23 @@
+{
+  "name": "kraken1",
+  "version": "0.1.0",
+  "description": "aaa",
+  "author": "Ruoxin",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test",
+    "build": "grunt build",
+    "all": "npm run build && npm run test"
+  },
+  "dependencies": {
+    "express": "^4.12.2",
+    "kraken-devtools": "^1.2.1",
+    "kraken-js": "^1.0.3",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.0",
+    "supertest": "^0.9.0"
+  }
+}
