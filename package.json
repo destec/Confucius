@@ -1,8 +1,8 @@
 {
-  "name": "kraken1",
-  "version": "0.1.0",
-  "description": "aaa",
-  "author": "Ruoxin",
+  "name": "Confucius",
+  "version": "0.0.1",
+  "description": "Project for moral educational management",
+  "author": "Destec",
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
