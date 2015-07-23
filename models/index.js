@@ -1,7 +1,1 @@
-'use strict';
-
-module.exports = function IndexModel() {
-  return {
-    name: 'index'
-  };
-};
+exports.UserModel = require('./user').UserModel();

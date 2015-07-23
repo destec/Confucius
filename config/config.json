@@ -1,5 +1,11 @@
 {
   "specialization": {},
+  "databaseConfig": {
+    "host": "localhost",
+    "database": "Confucius",
+    "username": "cat",
+    "password": "123456"
+  },
   "middleware": {
     "static": {
       "module": {

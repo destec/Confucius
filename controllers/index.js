@@ -1,11 +1,17 @@
-'use strict';
-
-var IndexModel = require('../models/index');
+var UserModel = require('../models/index').UserModel;
 
 module.exports = function(router) {
-  var model = new IndexModel();
   router.get('/', function(req, res) {
-    res.send('<code><pre>' + JSON.stringify(model, null, 2) +
-      '</pre></code>');
+    UserModel.findOne({
+      where: {
+        username: 'admin'
+      },
+      raw: true
+    }).then(function(user) {
+      console.log(user);
+      res.send('<code><pre>' + JSON.stringify(user, null, 2) +
+        '</pre></code>');
+    });
+
   });
 };
