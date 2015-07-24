@@ -1,2 +1,3 @@
-# Confucius
-Project for moral educational management
+# sailstest
+
+a [Sails](http://sailsjs.org) application
