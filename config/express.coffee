@@ -11,8 +11,9 @@ exphbs  = require 'express-handlebars'
 
 module.exports = (app, config) ->
   app.engine 'handlebars', exphbs(
+    extname: 'hbs'
     layoutsDir: config.root + '/app/views/layouts/'
-    defaultLayout: 'main'
+    defaultLayout: 'index'
     partialsDir: [config.root + '/app/views/partials/']
   )
   app.set 'views', config.root + '/app/views'
@@ -47,7 +48,7 @@ module.exports = (app, config) ->
 
   # development error handler
   # will print stacktrace
-  
+
   if app.get('env') == 'development'
     app.use (err, req, res, next) ->
       res.status err.status || 500

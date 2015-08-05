@@ -5,8 +5,5 @@ db = require '../models'
 module.exports = (app) ->
   app.use '/', router
 
-router.get '/', (req, res, next) ->
-  db.Article.findAll().success (articles) ->
-    res.render 'index',
-      title: 'Generator-Express MVC'
-      articles: articles
+router.get '/dwz.frag.xml', (req, res) ->
+  res.redirect '/components/dwz.frag.xml'
