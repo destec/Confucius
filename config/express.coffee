@@ -12,11 +12,11 @@ exphbs  = require 'express-handlebars'
 module.exports = (app, config) ->
   app.engine 'handlebars', exphbs(
     extname: 'hbs'
-    layoutsDir: config.root + '/app/views/layouts/'
+    layoutsDir: config.root + '/src/views/layouts/'
     defaultLayout: 'index'
-    partialsDir: [config.root + '/app/views/partials/']
+    partialsDir: [config.root + '/src/views/partials/']
   )
-  app.set 'views', config.root + '/app/views'
+  app.set 'views', config.root + '/src/views'
   app.set 'view engine', 'handlebars'
 
   env = process.env.NODE_ENV || 'development'
@@ -34,7 +34,7 @@ module.exports = (app, config) ->
   app.use express.static config.root + '/public'
   app.use methodOverride()
 
-  controllers = glob.sync config.root + '/app/controllers/**/*.coffee'
+  controllers = glob.sync config.root + '/src/controllers/**/*.coffee'
   controllers.forEach (controller) ->
     require(controller)(app);
 
