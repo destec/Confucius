@@ -5,5 +5,5 @@ db = require '../models'
 module.exports = (app) ->
   app.use '/', router
 
-router.get '/dwz.frag.xml', (req, res) ->
-  res.redirect '/components/dwz.frag.xml'
+router.get '/', (req, res) ->
+  res.render 'index'
