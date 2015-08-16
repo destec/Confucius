@@ -1,0 +1,67 @@
+<form id="pagerForm" method="post" action="demo_page1.html">
+	<input type="hidden" name="status" value="${param.status}">
+	<input type="hidden" name="keywords" value="${param.keywords}" />
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+</form>
+
+
+<div class="pageHeader">
+	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+        <td>
+					班级名称: <input type="text" name="keyword" />
+				</td>
+				<td>
+					院系名称: <input type="text" name="keyword" />
+				</td>
+			</tr>
+		</table>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="demo_page4.html" target="navTab"><span>添加</span></a></li>
+			<li><a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="demo_page4.html?uid={sid_user}" target="navTab"><span>修改</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+        <th width="120">班级名称</th>
+        <th width="120">班主任</th>
+				<th width="120">所属院系</th>
+				<th width="80">创建时间</th>
+				<th width="80">更新时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each classes}}
+				<tr target="sid_class" rel={{id}}>
+					<td>{{name}}</td>
+					<td>{{createdAt}}</td>
+					<td>{{updatedAt}}</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{{count}}条</span>
+		</div>
+
+		<div class="pagination" targetType="navTab" totalCount={{count}} numPerPage="20" pageNumShown="10" currentPage="1"></div>
+
+	</div>
+</div>

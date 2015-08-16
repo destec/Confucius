@@ -3,9 +3,6 @@ router = express.Router()
 db = require '../models'
 dbUtils = require '../utils/dbUtils'
 
-module.exports = (app) ->
-  app.use '/user', router
-
 router.get '/admins', (req, res) ->
   template = 'user/admin'
   db.User.findAndCountAll()
@@ -15,6 +12,25 @@ router.get '/admins', (req, res) ->
       count: result.count
     res.render template, ret
 
+router.get '/admins/create', (req, res) ->
+  template = 'user/admin_dialog'
+  res.render template
+
+router.post '/admins/create', (req, res) ->
+  params =
+    code: req.body.code
+    username: req.body.username
+    password: req.body.password
+    email: req.body.email
+  db.User.create params
+  .then (result) ->
+    ret =
+      statusCode: "200"
+      message: "管理员添加成功"
+    res.status 200
+    .send ret
+  # db.User.fi
+
 router.get '/teachers', (req, res) ->
   template = 'user/teacher'
   res.render template
@@ -22,3 +38,6 @@ router.get '/teachers', (req, res) ->
 router.get '/students', (req, res) ->
   template = 'user/student'
   res.render template
+
+module.exports = (app) ->
+  app.use '/user', router
