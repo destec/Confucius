@@ -12,6 +12,9 @@ router.get '/admins', (req, res) ->
       count: result.count
     res.render template, ret
 
+router.post '/admins', (req, res) ->
+  res.redirect '/user/admins'
+
 router.get '/admins/create', (req, res) ->
   template = 'user/admin_dialog'
   res.render template
@@ -25,15 +28,40 @@ router.post '/admins/create', (req, res) ->
   db.User.create params
   .then (result) ->
     ret =
+      statusCode: '200'
+      message: '管理员添加成功'
+      navTabId: 'user_page_admin'
+      rel: ''
+      callbackType: 'closeCurrent'
+    res.send ret
+
+router.post '/admins/delete', (req, res) ->
+  uid = req.query.uid
+  db.User.findOne
+    where:
+      id: uid
+  .then (user) ->
+    user.destroy()
+    .then (result) ->
+      return result
+  .then (result) ->
+    ret =
       statusCode: "200"
-      message: "管理员添加成功"
+      message: "管理员删除成功"
+      rel: 'user_page_admin'
+      navTabId: 'user_page_admin'
     res.status 200
     .send ret
-  # db.User.fi
+
+router.get '/admins/edit', (req, res) ->
+
 
 router.get '/teachers', (req, res) ->
   template = 'user/teacher'
   res.render template
+
+router.post '/teachers', (req, res) ->
+  res.redirect '/user/teachers'
 
 router.get '/students', (req, res) ->
   template = 'user/student'
