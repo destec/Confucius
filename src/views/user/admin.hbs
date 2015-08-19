@@ -1,3 +1,11 @@
+<form id="pagerForm" method="post" action="">
+	<!-- <input type="hidden" name="status" value="${param.status}"> -->
+	<!-- <input type="hidden" name="keywords" value="${param.keywords}" /> -->
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="{{count}}" />
+	<!-- <input type="hidden" name="orderField" value="${param.orderField}" /> -->
+</form>
+
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="" method="post">
 	<div class="searchBar">
@@ -33,9 +41,9 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="/user/admins/create" target="dialog" rel="admin" mask="true" title="添加"><span>添加</span></a></li>
+			<li><a class="add" href="/user/admins/create" target="dialog" rel="admin_create" title="添加" refresh=true><span>添加</span></a></li>
 			<li><a class="delete" href="/user/admins/delete?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
-			<li><a class="edit" href="/user/admins/edit?uid={sid_user}" target="dialog" rel="admin" mask="true" title="修改"><span>修改</span></a></li>
+			<li><a class="edit" href="/user/admins/edit?uid={sid_user}" target="dialog" rel="admin_edit" mask="true" title="修改"><span>修改</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="138">
