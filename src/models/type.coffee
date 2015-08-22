@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) ->
 
   Type = sequelize.define 'Type',
+    code: type: DataTypes.INTEGER, unique: true, allowNull: false
     name: DataTypes.STRING
     score: DataTypes.INTEGER
     createdAt:
