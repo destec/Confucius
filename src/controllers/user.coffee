@@ -46,8 +46,8 @@ router.post '/admins/delete', (req, res) ->
       return result
   .then (result) ->
     ret =
-      statusCode: "200"
-      message: "管理员删除成功"
+      statusCode: '200'
+      message: '管理员删除成功'
       rel: ''
       navTabId: 'user_page_admin'
     res.status 200
