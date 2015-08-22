@@ -1,0 +1,27 @@
+
+<div class="pageContent">
+	<form method="post" action="/department/classes/create" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>班级名称: </label>
+				<input name="name" type="text" size="30" alt=""/>
+			</p>
+      <p>
+				<label>班主任: </label>
+				<input name="director" type="text" size="30" alt=""/>
+			</p>
+			<p>
+				<label>学院名称: </label>
+				<input name="college" type="text" size="30" alt=""/>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
