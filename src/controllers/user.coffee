@@ -124,7 +124,7 @@ router.get '/students/create', (req, res) ->
 router.post '/students/create', (req, res) ->
   params =
     code: req.body.code
-    name: req.body.username
+    name: req.body.name
   db.Student.create params
   .then (result) ->
     ret =
