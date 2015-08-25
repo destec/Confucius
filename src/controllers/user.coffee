@@ -23,8 +23,10 @@ router.post '/admins/create', (req, res) ->
   params =
     code: req.body.code
     username: req.body.username
+    realname: req.body.realname
     password: req.body.password
     email: req.body.email
+    phone: req.body.phone
   db.User.create params
   .then (result) ->
     ret =
