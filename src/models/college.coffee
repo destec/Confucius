@@ -11,6 +11,6 @@ module.exports = (sequelize, DataTypes) ->
       defaultValue: DataTypes.NOW
 
   , classMethods:
-  
+
     associate: (models) ->
       College.hasMany models.Class

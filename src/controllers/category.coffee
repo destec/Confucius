@@ -77,7 +77,6 @@ router.post '/types/create', (req, res) ->
     code: req.body.code
     score: req.body.score
     CategoryId: req.body.category
-  console.log params
   db.Type.create params
   .then (result) ->
     ret =

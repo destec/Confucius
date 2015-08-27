@@ -2,6 +2,7 @@ express  = require 'express'
 router = express.Router()
 db = require '../models'
 dbUtils = require '../utils/dbUtils'
+Promise = require 'bluebird'
 
 router.get '/colleges', (req, res) ->
   template = 'department/college'
@@ -57,6 +58,21 @@ router.get '/classes', (req, res) ->
     ret =
       classes: dbUtils.getDataValues result.rows
       count: result.count
+  .then (ret) ->
+    Promise.map ret.classes, (classIns) ->
+      Promise.props
+        teacherProm: db.Teacher.findById classIns.TeacherId
+        collegeProm: db.College.findById classIns.CollegeId
+      .then (ref) ->
+        classIns.teacher = ref.teacherProm.realname
+        classIns.college = ref.collegeProm.name
+        return classIns
+    .then (result) ->
+      return result
+  .then (data) ->
+    ret =
+      classes: data
+      count: data.length
     res.render template, ret
 
 router.post '/classes', (req, res) ->
@@ -64,13 +80,20 @@ router.post '/classes', (req, res) ->
 
 router.get '/classes/create', (req, res) ->
   template = 'department/class_dialog'
-  res.render template
+  Promise.props
+    collegesProm: db.College.findAll()
+    teachersProm: db.Teacher.findAll()
+  .then (result) ->
+    ret =
+      colleges: dbUtils.getDataValues result.collegesProm
+      teachers: dbUtils.getDataValues result.teachersProm
+    res.render template, ret
 
 router.post '/classes/create', (req, res) ->
   params =
     name: req.body.name
-    director: req.body.director
-    college: req.body.college
+    TeacherId: req.body.director
+    CollegeId: req.body.college
   db.Class.create params
   .then (result) ->
     ret =

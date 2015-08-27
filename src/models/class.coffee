@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) ->
 
   Class = sequelize.define 'Class',
     name: DataTypes.STRING
-    director: DataTypes.STRING
     createdAt:
       type: DataTypes.DATE
       defaultValue: DataTypes.NOW
@@ -15,3 +14,4 @@ module.exports = (sequelize, DataTypes) ->
 
     associate: (models) ->
       Class.belongsTo models.College
+      Class.belongsTo models.Teacher

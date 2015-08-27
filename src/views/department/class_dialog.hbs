@@ -8,11 +8,21 @@
 			</p>
       <p>
 				<label>班主任: </label>
-				<input name="director" type="text" size="30" alt=""/>
+				<select class="combox" name="director">
+					{{#each teachers}}
+						<option value={{id}}>{{realname}}</option>
+					{{/each}}
+				</select>
+				<!-- <input name="director" type="text" size="30" alt=""/> -->
 			</p>
 			<p>
 				<label>学院名称: </label>
-				<input name="college" type="text" size="30" alt=""/>
+				<select class="combox" name="college">
+					{{#each colleges}}
+						<option value={{id}}>{{name}}</option>
+					{{/each}}
+				</select>
+				<!-- <input name="college" type="text" size="30" alt=""/> -->
 			</p>
 		</div>
 		<div class="formBar">
