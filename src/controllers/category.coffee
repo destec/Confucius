@@ -65,13 +65,19 @@ router.post '/types', (req, res) ->
 
 router.get '/types/create', (req, res) ->
   template = 'category/type_dialog'
-  res.render template
+  db.Category.findAll()
+  .then (categories) ->
+    ret =
+      categories: dbUtils.getDataValues categories
+    res.render template, ret
 
 router.post '/types/create', (req, res) ->
   params =
     name: req.body.name
     code: req.body.code
     score: req.body.score
+    CategoryId: req.body.category
+  console.log params
   db.Type.create params
   .then (result) ->
     ret =
