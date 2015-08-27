@@ -77,6 +77,7 @@ router.post '/teachers/create', (req, res) ->
   params =
     code: req.body.code
     username: req.body.username
+    realname: req.body.realname
     password: req.body.password
     email: req.body.email
   db.Teacher.create params
