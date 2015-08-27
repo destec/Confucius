@@ -8,7 +8,13 @@
 			</p>
 			<p>
 				<label>从属大类: </label>
-				<input name="temp" type="text" size="30" alt=""/>
+				<select class="combox" name="category">
+					{{#each categories}}
+						<option value={{id}}>{{name}}</option>
+					{{/each}}
+          <!-- <option value="帮助老师打扫卫生">帮助老师打扫卫生</option>
+          <option value="协助老师检查">协助老师检查</option> -->
+        </select>
 			</p>
 			<p>
 				<label>分值: </label>

@@ -13,3 +13,8 @@ module.exports = (sequelize, DataTypes) ->
     updatedAt:
       type: DataTypes.DATE
       defaultValue: DataTypes.NOW
+
+  , classMethods:
+
+    associate: (models) ->
+      Category.hasMany models.Type
