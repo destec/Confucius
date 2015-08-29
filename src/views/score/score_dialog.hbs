@@ -1,24 +1,27 @@
 
 <div class="pageContent">
-	<form method="post" action="/score/scores/create" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+	<form method="post" action="/score/scores/create" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
 		<div class="pageFormContent" layoutH="56">
 			<p>
 				<label>学生学号: </label>
-				<input name="code" type="text" size="30" alt=""/>
+				<input id="studentId" name="student.id" value="" type="hidden"/>
+				<input class="required" name="student.code" type="text" postField="keyword" suggestFields="code,className,name"
+					suggestUrl="/user/students/lookup" lookupGroup="student" size="30"/>
+				<a class="btnLook" href="/user/students/lookup" lookupGroup="student">查找带回</a>
 			</p>
 			<p>
 				<label>学生姓名: </label>
-				<input name="name" type="text" size="30" alt="输入学生真实姓名"/>
+				<input name="student.name" class="readonly" readonly="readonly" type="text" size="30" alt=""/>
 			</p>
       <p>
         <label>学生班级: </label>
-				<input name="class" type="text" size="30" alt=""/>
+				<input name="student.className" type="text" class="readonly" readonly="readonly" size="30" alt=""/>
       </p>
       <p>
         <label>加减分原因: </label>
 				<input id="typeId" name="type.id" value="" type="hidden"/>
 				<input class="required" name="type.name" type="text" postField="keyword" suggestFields="name,score"
-					suggestUrl="/category/types/lookUp" lookupGroup="type" size="30"/>
+					suggestUrl="/category/types/lookup" lookupGroup="type" size="30"/>
       </p>
       <p>
         <label>分值: </label>
