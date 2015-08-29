@@ -131,6 +131,28 @@ router.get '/students', (req, res) ->
 router.post '/students', (req, res) ->
   res.redirect '/user/students'
 
+router.get '/students/lookup', (req, res) ->
+  template = 'user/student_search_dialog'
+  db.Student.findAndCountAll()
+  .then (result) ->
+    ret =
+      students: dbUtils.getDataValues result.rows
+      count: result.count
+  .then (result) ->
+    Promise.map result.students, (student) ->
+      db.Class.findById student.ClassId
+      .then (classIns) ->
+        student.className = classIns.name
+        return student
+    .then (students) ->
+      result.students = students
+      return result
+  .then (ret) ->
+    res.render template, ret
+
+router.post '/students/lookup', (req, res) ->
+  console.log req.body
+
 router.get '/students/create', (req, res) ->
   template = 'user/student_dialog'
   db.Class.findAll()

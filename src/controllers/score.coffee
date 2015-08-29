@@ -21,11 +21,11 @@ router.get '/scores/create', (req, res) ->
 
 router.post '/scores/create', (req, res) ->
   params =
-    code: req.body.code
-    student: req.body.name
-    class: req.body.class
-    type: req.body.type
-    score: req.body.score
+    code: req.body['student.code']
+    student: req.body['student.name']
+    class: req.body['student.className']
+    type: req.body['type.name']
+    score: req.body['type.score']
     teacher: 'Cat'
   db.Score.create params
   .then (result) ->
