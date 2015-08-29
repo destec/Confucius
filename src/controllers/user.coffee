@@ -1,5 +1,6 @@
 express  = require 'express'
 router = express.Router()
+Promise = require 'bluebird'
 db = require '../models'
 dbUtils = require '../utils/dbUtils'
 
@@ -115,6 +116,16 @@ router.get '/students', (req, res) ->
     ret =
       students: dbUtils.getDataValues result.rows
       count: result.count
+  .then (result) ->
+    Promise.map result.students, (student) ->
+      db.Class.findById student.ClassId
+      .then (classIns) ->
+        student.className = classIns.name
+        return student
+    .then (students) ->
+      result.students = students
+      return result
+  .then (ret) ->
     res.render template, ret
 
 router.post '/students', (req, res) ->
@@ -122,12 +133,17 @@ router.post '/students', (req, res) ->
 
 router.get '/students/create', (req, res) ->
   template = 'user/student_dialog'
-  res.render template
+  db.Class.findAll()
+  .then (classes) ->
+    ret =
+      classes: dbUtils.getDataValues classes
+    res.render template, ret
 
 router.post '/students/create', (req, res) ->
   params =
     code: req.body.code
     name: req.body.name
+    ClassId: req.body.class
   db.Student.create params
   .then (result) ->
     ret =
@@ -143,7 +159,7 @@ router.post '/students/delete', (req, res) ->
   db.Student.findOne
     where:
       id: uid
-  .then (teacher) ->
+  .then (student) ->
     student.destroy()
     .then (result) ->
       return result

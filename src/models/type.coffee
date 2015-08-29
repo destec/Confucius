@@ -16,3 +16,4 @@ module.exports = (sequelize, DataTypes) ->
 
     associate: (models) ->
       Type.belongsTo models.Category
+      Type.hasMany models.Score

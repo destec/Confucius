@@ -60,6 +60,11 @@ router.get '/types', (req, res) ->
       count: result.count
     res.render template, ret
 
+router.all '/types/lookUp', (req, res) ->
+  db.Type.findAndCountAll()
+  .then (result) ->
+    res.json dbUtils.getDataValues result.rows
+
 router.post '/types', (req, res) ->
   res.redirect '/category/types'
 

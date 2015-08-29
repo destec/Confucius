@@ -15,3 +15,8 @@ module.exports = (sequelize, DataTypes) ->
     updatedAt:
       type: DataTypes.DATE
       defaultValue: DataTypes.NOW
+
+  , classMethods:
+
+    associate: (models) ->
+      Score.belongsTo models.Type

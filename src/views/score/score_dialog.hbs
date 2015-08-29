@@ -16,14 +16,13 @@
       </p>
       <p>
         <label>加减分原因: </label>
-        <select class="combox" name="type">
-          <option value="帮助老师打扫卫生">帮助老师打扫卫生</option>
-          <option value="协助老师检查">协助老师检查</option>
-        </select>
+				<input id="typeId" name="type.id" value="" type="hidden"/>
+				<input class="required" name="type.name" type="text" postField="keyword" suggestFields="name,score"
+					suggestUrl="/category/types/lookUp" lookupGroup="type" size="30"/>
       </p>
       <p>
         <label>分值: </label>
-				<input name="score" type="number" size="30" alt=""/>
+				<input name="type.score" class="readonly" readonly="readonly" type="text" size="30" alt=""/>
       </p>
       <p>
         <label>登记人: </label>

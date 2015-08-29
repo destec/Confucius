@@ -10,3 +10,8 @@ module.exports = (sequelize, DataTypes) ->
     updatedAt:
       type: DataTypes.DATE
       defaultValue: DataTypes.NOW
+
+  , classMethods:
+
+    associate: (models) ->
+      Student.belongsTo models.Class

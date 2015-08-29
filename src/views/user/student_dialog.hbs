@@ -10,6 +10,14 @@
 				<label>学生姓名: </label>
 				<input name="name" type="text" size="30" alt="输入管理员真实姓名"/>
 			</p>
+			<p>
+				<label>班级: </label>
+				<select class="combox" name="class">
+					{{#each classes}}
+						<option value={{id}}>{{name}}</option>
+					{{/each}}
+				</select>
+			</p>
 		</div>
 		<div class="formBar">
 			<ul>
