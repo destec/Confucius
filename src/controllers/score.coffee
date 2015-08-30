@@ -26,6 +26,7 @@ router.post '/scores/create', (req, res) ->
     class: req.body['student.className']
     type: req.body['type.name']
     score: req.body['type.score']
+    TypeId: req.body['type.id']
     teacher: 'Cat'
   db.Score.create params
   .then (result) ->
@@ -55,7 +56,19 @@ router.post '/scores/delete', (req, res) ->
     res.status 200
     .send ret
 
-router.get '/admins/edit', (req, res) ->
+router.get '/scores/edit', (req, res) ->
+  uid = req.query.uid
+  db.Score.findById uid
+  .then (result) ->
+    ret =
+      code: result.code
+      student: result.student
+      class: result.class
+      type: result.type
+      score: result.score
+      TypeId: result.TypeId
+      teacher: result.teacher
+    res.render 'score/score_edit', ret
 
 module.exports = (app) ->
   app.use '/score', router

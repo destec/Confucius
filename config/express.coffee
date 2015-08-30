@@ -5,6 +5,7 @@ path = require 'path'
 favicon = require 'serve-favicon'
 logger = require 'morgan'
 cookieParser = require 'cookie-parser'
+cookieSession = require 'cookie-session'
 bodyParser = require 'body-parser'
 compress = require 'compression'
 methodOverride = require 'method-override'
@@ -30,13 +31,21 @@ module.exports = (app, config) ->
     extended: true
   )
   app.use cookieParser()
+  app.use cookieSession(
+    secret: 'catlab@jxxsxy.com'
+    keys: ['user']
+  )
+  app.use require('../src/middlewares/auth').authCheck
+  app.use (req, res, next) ->
+    console.log req.session
+    next()
   app.use compress()
   app.use express.static('public')
   app.use methodOverride()
 
   controllers = glob.sync config.root + '/src/controllers/**/*.coffee'
   controllers.forEach (controller) ->
-    require(controller)(app);
+    require(controller)(app)
 
   # catch 404 and forward to error handler
   # app.use (req, res, next) ->

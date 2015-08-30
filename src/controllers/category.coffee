@@ -80,7 +80,7 @@ router.post '/types/create', (req, res) ->
   params =
     name: req.body.name
     code: req.body.code
-    score: req.body.score
+    score: +req.body.score
     CategoryId: req.body.category
   db.Type.create params
   .then (result) ->
