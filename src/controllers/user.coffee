@@ -148,6 +148,8 @@ router.get '/students/lookup', (req, res) ->
       result.students = students
       return result
   .then (ret) ->
+    ret.username = req.session.user.username
+    console.log ret
     res.render template, ret
 
 router.post '/students/lookup', (req, res) ->

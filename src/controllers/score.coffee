@@ -17,7 +17,9 @@ router.post '/scores', (req, res) ->
 
 router.get '/scores/create', (req, res) ->
   template = 'score/score_dialog'
-  res.render template
+  ret =
+    username: req.session.user.username
+  res.render template, ret
 
 router.post '/scores/create', (req, res) ->
   params =
