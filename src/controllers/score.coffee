@@ -1,5 +1,6 @@
 express  = require 'express'
 router = express.Router()
+_ = require 'lodash'
 db = require '../models'
 dbUtils = require '../utils/dbUtils'
 
@@ -22,17 +23,25 @@ router.get '/scores/create', (req, res) ->
   res.render template, ret
 
 router.post '/scores/create', (req, res) ->
-
-  params =
-    code: req.body['student.code']
-    student: req.body['student.name']
-    class: req.body['student.className']
-    type: req.body['type.name']
-    score: req.body['type.score']
-    TypeId: req.body['type.id']
-    teacher: req.body.username
-  db.Score.create params
-  .then (result) ->
+  params = _.zip req.body['student.code'].split(','), req.body['student.name'].split(','), req.body['student.className'].split(',')
+  if params[0].length isnt params[1].length isnt params[2].length
+    ret =
+      statusCode: '300'
+      message: '学分记录添加失败，长度不一致'
+    return res.send ret
+  promArr = []
+  params.forEach (param) ->
+    score =
+      code: param[0]
+      student: param[1]
+      class: param[2]
+      type: req.body['type.name']
+      score: req.body['type.score']
+      TypeId: req.body['type.id']
+      teacher: req.body.teacher
+    promArr.push db.Score.create score
+  Promise.all promArr
+  .then (data) ->
     ret =
       statusCode: '200'
       message: '学分记录添加成功'
