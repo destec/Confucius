@@ -129,7 +129,26 @@ router.get '/students', (req, res) ->
     res.render template, ret
 
 router.post '/students', (req, res) ->
-  res.redirect '/user/students'
+  template = 'user/student'
+  db.Student.findAll
+    where:
+      name:
+        $like: "%#{req.body.name}%"
+  .then (result) ->
+    ret =
+      students: dbUtils.getDataValues result
+      count: result.length
+  .then (result) ->
+    Promise.map result.students, (student) ->
+      db.Class.findById student.ClassId
+      .then (classIns) ->
+        student.className = classIns.name
+        return student
+    .then (students) ->
+      result.students = students
+      return result
+  .then (ret) ->
+    res.render template, ret
 
 router.get '/students/lookup', (req, res) ->
   template = 'user/student_search_dialog'
