@@ -36,9 +36,6 @@ module.exports = (app, config) ->
     keys: ['user']
   )
   app.use require('../src/middlewares/auth').authCheck
-  app.use (req, res, next) ->
-    console.log req.session
-    next()
   app.use compress()
   app.use express.static('public')
   app.use methodOverride()
