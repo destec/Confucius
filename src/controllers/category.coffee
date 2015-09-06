@@ -13,7 +13,18 @@ router.get '/categories', (req, res) ->
     res.render template, ret
 
 router.post '/categories', (req, res) ->
-  res.redirect '/category/categories'
+  template = 'category/category'
+  console.log req.body.name
+  db.Category.findAll
+    where:
+      name:
+        $like: "%#{req.body.name}%"
+  .then (result) ->
+    ret =
+      categories: dbUtils.getDataValues result
+      count: result.length
+    console.log ret
+    res.render template, ret
 
 router.get '/categories/create', (req, res) ->
   template = 'category/category_dialog'
