@@ -13,7 +13,16 @@ router.get '/categories', (req, res) ->
     res.render template, ret
 
 router.post '/categories', (req, res) ->
-  res.redirect '/category/categories'
+  template = 'category/category'
+  db.Category.findAll
+    where:
+      name:
+        $like: "%#{req.body.name}%"
+  .then (result) ->
+    ret =
+      categories: dbUtils.getDataValues result
+      count: result.length
+    res.render template, ret
 
 router.get '/categories/create', (req, res) ->
   template = 'category/category_dialog'
@@ -66,7 +75,16 @@ router.all '/types/lookup', (req, res) ->
     res.json dbUtils.getDataValues result.rows
 
 router.post '/types', (req, res) ->
-  res.redirect '/category/types'
+  template = 'category/type'
+  db.Type.findAll
+    where:
+      name:
+        $like: "%#{req.body.name}%"
+  .then (result) ->
+    ret =
+      types: dbUtils.getDataValues result
+      count: result.length
+    res.render template, ret
 
 router.get '/types/create', (req, res) ->
   template = 'category/type_dialog'
