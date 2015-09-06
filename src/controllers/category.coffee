@@ -14,7 +14,6 @@ router.get '/categories', (req, res) ->
 
 router.post '/categories', (req, res) ->
   template = 'category/category'
-  console.log req.body.name
   db.Category.findAll
     where:
       name:
@@ -23,7 +22,6 @@ router.post '/categories', (req, res) ->
     ret =
       categories: dbUtils.getDataValues result
       count: result.length
-    console.log ret
     res.render template, ret
 
 router.get '/categories/create', (req, res) ->
@@ -77,7 +75,16 @@ router.all '/types/lookup', (req, res) ->
     res.json dbUtils.getDataValues result.rows
 
 router.post '/types', (req, res) ->
-  res.redirect '/category/types'
+  template = 'category/type'
+  db.Type.findAll
+    where:
+      name:
+        $like: "%#{req.body.name}%"
+  .then (result) ->
+    ret =
+      types: dbUtils.getDataValues result
+      count: result.length
+    res.render template, ret
 
 router.get '/types/create', (req, res) ->
   template = 'category/type_dialog'
