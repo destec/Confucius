@@ -24,11 +24,11 @@ router.get '/scores/create', (req, res) ->
 
 router.post '/scores/create', (req, res) ->
   params = _.zip req.body['student.code'].split(','), req.body['student.name'].split(','), req.body['student.className'].split(',')
-  if params[0].length isnt params[1].length isnt params[2].length
-    ret =
-      statusCode: '300'
-      message: '学分记录添加失败，长度不一致'
-    return res.send ret
+  # if params[0].length isnt params[1].length isnt params[2].length
+  #   ret =
+  #     statusCode: '300'
+  #     message: '学分记录添加失败，长度不一致'
+  #   return res.send ret
   promArr = []
   params.forEach (param) ->
     score =
