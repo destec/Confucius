@@ -14,7 +14,16 @@ router.get '/admins', (req, res) ->
     res.render template, ret
 
 router.post '/admins', (req, res) ->
-  res.redirect '/user/admins'
+  template = 'user/admin'
+  db.User.findAll
+    where:
+      realname:
+        $like: "%#{req.body.realname}%"
+  .then (result) ->
+    ret =
+      users: dbUtils.getDataValues result
+      count: result.length
+    res.render template, ret
 
 router.get '/admins/create', (req, res) ->
   template = 'user/admin_dialog'
