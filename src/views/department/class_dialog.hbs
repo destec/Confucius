@@ -3,7 +3,7 @@
 	<form method="post" action="/department/classes/create" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<div class="pageFormContent" layoutH="56">
 			<p>
-				<label>班级名称: </label>
+				<label>部门名称: </label>
 				<input name="name" type="text" size="30" alt=""/>
 			</p>
       <p>
@@ -16,7 +16,7 @@
 				<!-- <input name="director" type="text" size="30" alt=""/> -->
 			</p>
 			<p>
-				<label>学院名称: </label>
+				<label>部门名称: </label>
 				<select class="combox" name="college">
 					{{#each colleges}}
 						<option value={{id}}>{{name}}</option>
