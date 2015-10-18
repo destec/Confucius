@@ -1,9 +1,8 @@
-<form id="pagerForm" method="post" action="demo_page1.html">
+<form id="pagerForm" method="post" action="">
 	<input type="hidden" name="status" value="${param.status}">
 	<input type="hidden" name="keywords" value="${param.keywords}" />
 	<input type="hidden" name="pageNum" value="1" />
-	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
-	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<input type="hidden" name="numPerPage" value="19" />
 </form>
 
 
@@ -66,7 +65,7 @@
 			<span>共{{count}}条</span>
 		</div>
 
-		<div class="pagination" targetType="navTab" totalCount={{count}} numPerPage="20" pageNumShown="10" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount={{totalCount}} numPerPage="19" pageNumShown="5" currentPage="{{currentPage}}"></div>
 
 	</div>
 </div>
