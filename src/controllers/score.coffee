@@ -6,15 +6,15 @@ dbUtils = require '../utils/dbUtils'
 
 router.get '/scores', (req, res) ->
   template = 'score/score'
-  db.Score.findAndCountAll()
-  .then (result) ->
-    ret =
-      scores: dbUtils.getDataValues result.rows
-      count: result.count
+  dbUtils.getPaginationResult 'Score', req.query
+  .then (ret) ->
     res.render template, ret
 
 router.post '/scores', (req, res) ->
-  res.redirect '/score/scores'
+  template = 'score/score'
+  dbUtils.getPaginationResult 'Score', req.body
+  .then (ret) ->
+    res.render template, ret
 
 router.get '/scores/create', (req, res) ->
   template = 'score/score_dialog'
