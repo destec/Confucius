@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) ->
 
   Score = sequelize.define 'Score',
     type: DataTypes.STRING
-    code: DataTypes.STRING
+    studentCode: DataTypes.STRING
+    studentName: DataTypes.STRING
     score: DataTypes.INTEGER
-    student: DataTypes.STRING
     class: DataTypes.STRING
     teacher: DataTypes.STRING
     description: DataTypes.STRING
@@ -19,4 +19,5 @@ module.exports = (sequelize, DataTypes) ->
   , classMethods:
 
     associate: (models) ->
+      Score.belongsTo models.Student
       Score.belongsTo models.Type

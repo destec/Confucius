@@ -7,12 +7,12 @@
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+	<form onsubmit="return navTabSearch(this);" action="/score/scores/search" method="post">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
         <td>
-					 学生名称: <input type="text" name="keyword" />
+					 学生名称: <input type="text" name="studentName" />
 				</td>
 			</tr>
 		</table>
@@ -50,8 +50,8 @@
 				<tr target="sid_uid" rel={{id}}>
 					<td>{{type}}</td>
           <td>{{score}}</td>
-          <td>{{student}}</td>
-					<td>{{code}}</td>
+          <td>{{studentName}}</td>
+					<td>{{studentCode}}</td>
           <td>{{class}}</td>
           <td>{{teacher}}</td>
 					<td>{{createdAt}}</td>

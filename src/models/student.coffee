@@ -15,3 +15,4 @@ module.exports = (sequelize, DataTypes) ->
 
     associate: (models) ->
       Student.belongsTo models.Class
+      Student.hasMany models.Score
