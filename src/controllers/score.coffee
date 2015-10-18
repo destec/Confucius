@@ -23,7 +23,10 @@ router.get '/scores/create', (req, res) ->
   res.render template, ret
 
 router.post '/scores/create', (req, res) ->
-  params = _.zip req.body['student.code'].split(','), req.body['student.name'].split(','), req.body['student.className'].split(',')
+  params = _.zip req.body['student.id'].split(','),
+    req.body['student.code'].split(','),
+    req.body['student.name'].split(','),
+    req.body['student.className'].split(',')
   # if params[0].length isnt params[1].length isnt params[2].length
   #   ret =
   #     statusCode: '300'
@@ -32,9 +35,10 @@ router.post '/scores/create', (req, res) ->
   promArr = []
   params.forEach (param) ->
     score =
-      code: param[0]
-      student: param[1]
-      class: param[2]
+      StudentId: param[0]
+      studentCode: param[1]
+      studentName: param[2]
+      class: param[3]
       type: req.body['type.name']
       score: req.body['type.score']
       TypeId: req.body['type.id']
@@ -81,6 +85,18 @@ router.get '/scores/edit', (req, res) ->
       TypeId: result.TypeId
       teacher: result.teacher
     res.render 'score/score_edit', ret
+
+router.post '/scores/search', (req, res) ->
+  template = 'score/score'
+  db.Score.findAll
+    where:
+      studentName:
+        $like: "%#{req.body.studentName}%"
+  .then (result) ->
+    ret =
+      scores: dbUtils.getDataValues result
+      count: result.length
+    res.render template, ret
 
 module.exports = (app) ->
   app.use '/score', router
