@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) ->
     password: type: DataTypes.STRING, allowNull: false
     realname: DataTypes.STRING
     email: DataTypes.STRING
+    phone: DataTypes.STRING
+    mobile: DataTypes.STRING
     code: type: DataTypes.INTEGER, unique: true, allowNull: false
     createdAt:
       type: DataTypes.DATE
