@@ -22,6 +22,14 @@
 				<label>教师邮件: </label>
 				<input name="email" class="email" type="text" size="30" alt="请输入教师邮件" />
 			</p>
+			<p>
+				<label>所属部门</label>
+				<select class="combox" name="college">
+					{{#each colleges}}
+						<option value={{id}}>{{name}}</option>
+					{{/each}}
+				</select>
+			</p>
 		</div>
 		<div class="formBar">
 			<ul>

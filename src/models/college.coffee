@@ -14,3 +14,4 @@ module.exports = (sequelize, DataTypes) ->
 
     associate: (models) ->
       College.hasMany models.Class
+      College.hasMany models.Teacher
