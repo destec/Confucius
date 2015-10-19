@@ -81,7 +81,11 @@ router.post '/teachers', (req, res) ->
 
 router.get '/teachers/create', (req, res) ->
   template = 'user/teacher_dialog'
-  res.render template
+  db.College.findAll()
+  .then (result) ->
+    colleges = dbUtils.getDataValues result
+    console.log colleges
+    res.render template, colleges
 
 router.post '/teachers/create', (req, res) ->
   params =
